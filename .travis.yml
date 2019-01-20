@@ -3,7 +3,7 @@ script: "bundle exec rake spec:coverage"
 cache: bundler
 env:
   global:
-    - CC_TEST_REPORTER_ID=<token>
+    - CC_TEST_REPORTER_ID=c1b17cd36cd4d025298f11b2a3ee678e4977c3969986f9ee497d6984a2c82c56
 before_install:
   - "gem update --system"
 before_script:
