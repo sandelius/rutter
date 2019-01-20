@@ -1,0 +1,29 @@
+language: ruby
+script: "bundle exec rake spec:coverage"
+cache: bundler
+env:
+  global:
+    - CC_TEST_REPORTER_ID=<token>
+before_install:
+  - "gem update --system"
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+rvm:
+  - 2.6.0
+  - 2.5.0
+  - jruby-9.2.0.0
+  - ruby-head
+  - jruby-head
+  - truffleruby
+matrix:
+  allow_failures:
+    - rvm: jruby-head
+    - rvm: ruby-head
+    - rvm: truffleruby
+branches:
+  only:
+    - master

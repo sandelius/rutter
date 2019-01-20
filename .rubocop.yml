@@ -1,0 +1,32 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  Exclude:
+    - "*.gemspec"
+    - "Gemfile"
+
+Performance:
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*"
+
+ClassAndModuleChildren:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  MinNameLength: 2
