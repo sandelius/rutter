@@ -36,6 +36,7 @@ end.freeze
 ```ruby
 class Books
   def self.call(env)
+    [200, {}, ["My Bookshelf"]]
   end
 end
 
