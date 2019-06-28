@@ -53,6 +53,14 @@ module Rutter
           .to eq("http://rutter.org/books/82")
       end
 
+      it "supports adding a subdomain" do
+        router = Rutter.new(base: "http://rutter.org")
+        router.get "/login", to: "sessions#new", as: :login
+
+        expect(router.url(:login, subdomain: "auth"))
+          .to eq("http://auth.rutter.org/login")
+      end
+
       it "raises an error if route not founf" do
         expect { router.url(:book) }
           .to raise_error(RuntimeError, "No route called 'book' was found")

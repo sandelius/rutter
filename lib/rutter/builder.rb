@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "uri"
+
 require_relative "naming"
 require_relative "verbs"
 require_relative "route"
@@ -36,7 +38,7 @@ module Rutter
     #
     # @private
     def initialize(base: "http://localhost:9292", &block)
-      @base = base
+      @uri = URI(base).freeze
       @flat_map = []
       @verb_map = Hash.new { |h, k| h[k] = [] }
       @named_map = {}
@@ -142,6 +144,9 @@ module Rutter
     # @param name [Symbol]
     #   Name of the route to generate URL from.
     #
+    # @overload expand(name, subdomain: value)
+    #   @param subdomain [String, Symbol]
+    #     Subdomain to be added to the host.
     # @overload expand(name, key: value)
     #   @param key [String, Integer, Array]
     #     Key value.
@@ -168,8 +173,12 @@ module Rutter
     #     # => "http://rutter.org/login?return_to=/"
     #   router.url(:book, id: 82)
     #     # => "http://rutter.org/books/82"
-    def url(name, *args)
-      @base + path(name, *args)
+    def url(name, **args)
+      host = @uri.scheme + "://"
+      host += "#{args.delete(:subdomain)}." if args.key?(:subdomain)
+      host += @uri.host
+      host += ":#{@uri.port}" if @uri.port != 80 && @uri.port != 443
+      host + path(name, args)
     end
 
     # Add a new, frozen, route to the map.
