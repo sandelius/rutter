@@ -18,6 +18,23 @@ module Rutter
         expect(route.match?(env_for("/admin/books")))
           .to eq("/admin")
       end
+
+      it "matches host if given" do
+        route = router.mount endpoint, at: "/v1", host: /\Aapi\./
+
+        expect(route.match?(env_for("http://example.com/v1/books")))
+          .to be_nil
+        expect(route.match?(env_for("http://api.example.com/v1/books")))
+          .to eq("/v1")
+      end
+
+      it "HTTP_X_FORWARDED_HOST are supported" do
+        route = router.mount endpoint, at: "/v1", host: /\Aapi\./
+        env = env_for("/v1/books", "HTTP_X_FORWARDED_HOST" => "api.example.com")
+
+        expect(route.match?(env))
+          .to eq("/v1")
+      end
     end
 
     describe "#path" do

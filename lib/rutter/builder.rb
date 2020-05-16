@@ -91,10 +91,12 @@ module Rutter
     #   Application to mount.
     # @param at [String]
     #   Path prefix to match.
+    # @param host [Regexp]
+    #   Match the given host pattern.
     #
     # @return [Rutter::Mount]
-    def mount(app, at:)
-      route = Mount.new(at, app)
+    def mount(app, at:, host: nil)
+      route = Mount.new(at, app, host: host)
       @flat_map << route
       VERBS.each { |verb| @verb_map[verb] << route }
       route

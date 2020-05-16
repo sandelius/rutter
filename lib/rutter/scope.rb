@@ -34,8 +34,8 @@ module Rutter
     end
 
     # @see Rutter::Builder#mount
-    def mount(app, at:)
-      @router.mount app, at: Naming.join(@path, at)
+    def mount(app, at:, host: nil)
+      @router.mount app, at: Naming.join(@path, at), host: host
     end
 
     # @see Rutter::Builder#scope
