@@ -7,7 +7,7 @@ HTTP router for Rack.
 Under development, not ready for prime-time just yet.
 
 [![Build Status](https://travis-ci.org/sandelius/rutter.svg?branch=master)](https://travis-ci.org/sandelius/rutter)
-[![Test Coverage](https://codeclimate.com/github/sandelius/rutter/badges/coverage.svg)](https://codeclimate.com/github/sandelius/rutter/coverage)
+[![codecov](https://codecov.io/gh/sandelius/rutter/branch/master/graph/badge.svg)](https://codecov.io/gh/sandelius/rutter)
 [![Inline docs](http://inch-ci.org/github/sandelius/rutter.svg?branch=master)](http://inch-ci.org/github/sandelius/rutter)
 
 ## Installation

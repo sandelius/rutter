@@ -2,16 +2,17 @@
 
 require "bundler/setup"
 
-unless ENV["CI"]
-  require "byebug"
-end
-
 if ENV["COVERAGE"] == "true"
   require "simplecov"
 
   SimpleCov.start do
     command_name "spec"
     add_filter "spec"
+  end
+
+  if ENV["CODECOV_TOKEN"]
+    require "codecov"
+    SimpleCov.formatter = SimpleCov::Formatter::Codecov
   end
 end
 

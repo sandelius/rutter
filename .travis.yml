@@ -3,20 +3,15 @@ script: "bundle exec rake spec:coverage"
 cache: bundler
 env:
   global:
-    - CC_TEST_REPORTER_ID=c1b17cd36cd4d025298f11b2a3ee678e4977c3969986f9ee497d6984a2c82c56
+    - CODECOV_TOKEN="21653af2-874b-4597-942d-14ddc7c2f8fa"
 before_install:
   - "gem update --system"
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 rvm:
+  - 2.7.0
   - 2.6.0
   - 2.5.0
-  - jruby-9.2.0.0
   - ruby-head
+  - jruby
   - jruby-head
   - truffleruby
 matrix:
