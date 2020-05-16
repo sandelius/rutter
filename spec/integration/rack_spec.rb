@@ -21,8 +21,6 @@ RSpec.describe "Rack compatible", type: :request do
         .to eq(200)
       expect(last_response.body)
         .to eq("I say, hello-world")
-      expect(last_response.headers["Content-Length"])
-        .to eq("18")
     end
   end
 
