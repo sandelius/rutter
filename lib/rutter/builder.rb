@@ -133,12 +133,12 @@ module Rutter
     #     # => "/login?return_to=/"
     #   router.path(:book, id: 82)
     #     # => "/books/82"
-    def path(name, *args)
+    def path(name, **args)
       unless (route = @named_map[name])
         raise "No route called '#{name}' was found"
       end
 
-      route.expand(*args)
+      route.expand(**args)
     end
 
     # Generates a full URL from the given arguments.
@@ -180,7 +180,7 @@ module Rutter
       host += "#{args.delete(:subdomain)}." if args.key?(:subdomain)
       host += @uri.host
       host += ":#{@uri.port}" if @uri.port != 80 && @uri.port != 443
-      host + path(name, args)
+      host + path(name, **args)
     end
 
     # Add a new, frozen, route to the map.

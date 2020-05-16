@@ -53,10 +53,11 @@ module Rutter
     protected
 
     # @private
-    def method_missing(method_name, *args)
+    def method_missing(method_name, **args)
       named_route, type = method_name.to_s.split(/\_(path|url)\z/)
       return super unless type
-      @router.public_send(type, named_route.to_sym, *args)
+
+      @router.public_send(type, named_route.to_sym, **args)
     end
 
     # @private
