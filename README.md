@@ -1,10 +1,6 @@
 # Rutter
 
-HTTP router for Rack.
-
-## Status
-
-Under development, not ready for prime-time just yet.
+HTTP router for Ramverk and Rack.
 
 [![Build Status](https://travis-ci.org/sandelius/rutter.svg?branch=master)](https://travis-ci.org/sandelius/rutter)
 [![codecov](https://codecov.io/gh/sandelius/rutter/branch/master/graph/badge.svg)](https://codecov.io/gh/sandelius/rutter)
