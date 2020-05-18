@@ -34,6 +34,20 @@ module Rutter
         expect(route.match?(env_for("/books/pickaxe")))
           .to be(false)
       end
+
+      it "support block as endpoint" do
+        scope = router.scope path: "/books"
+        scope.get "/" do |env|
+          [200, {}, [env["message"]]]
+        end
+
+        _, _, body = router.call("REQUEST_METHOD" => "GET",
+                                 "PATH_INFO" => "/books",
+                                 "message" => "Hello World")
+
+        expect(body.join)
+          .to eq("Hello World")
+      end
     end
 
     describe "#mount" do

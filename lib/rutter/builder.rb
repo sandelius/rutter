@@ -195,14 +195,23 @@ module Rutter
     #   Route name/identifier.
     # @param constraints [Hash]
     #   Route segment constraints.
+    # @param &block [Proc]
+    #   Endpoint as a block.
+    # @yieldparam env [Hash]
+    #   Rack's environment hash.
     #
     # @return [Rutter::Route]
     #
     # @raise [ArgumentError]
     #   If verb is unsupported.
+    # @raise [ArgumentError]
+    #   If endpoint is missing.
     #
     # @private
-    def add(verb, path, to:, as: nil, constraints: nil)
+    def add(verb, path, to: nil, as: nil, constraints: nil, &block)
+      to = block if block_given?
+      raise "Missing endpoint" unless to
+
       verb = verb.to_s.upcase
 
       unless VERBS.include?(verb)
@@ -231,8 +240,8 @@ module Rutter
 
     # @see #add
     VERBS.each do |verb|
-      define_method verb.downcase do |path, to:, as: nil, constraints: nil|
-        add verb, path, to: to, as: as, constraints: constraints
+      define_method verb.downcase do |path, to: nil, as: nil, constraints: nil, &block|
+        add verb, path, to: to, as: as, constraints: constraints, &block
       end
     end
 

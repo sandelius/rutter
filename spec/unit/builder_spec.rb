@@ -107,6 +107,24 @@ module Rutter
         expect(route.match?(env_for("/books/pickaxe")))
           .to be(false)
       end
+
+      it "support block as endpoint" do
+        router.get "/" do |env|
+          [200, {}, [env["message"]]]
+        end
+
+        _, _, body = router.call("REQUEST_METHOD" => "GET",
+                                 "PATH_INFO" => "/",
+                                 "message" => "Hello World")
+
+        expect(body.join)
+          .to eq("Hello World")
+      end
+
+      it "raises an error if no endpoint is given" do
+        expect { router.get "/" }
+          .to raise_error("Missing endpoint")
+      end
     end
 
     describe "verbs" do

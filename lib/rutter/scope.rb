@@ -49,18 +49,18 @@ module Rutter
     end
 
     # @see Rutter::Builder#add
-    def add(verb, path, to:, as: nil, constraints: nil)
+    def add(verb, path, to: nil, as: nil, constraints: nil, &block)
       path = Naming.join(@path, path)
       to = Naming.join(@namespace, to) if to.is_a?(String)
       as = Naming.join(@as, as) if as
 
-      @router.add verb, path, to: to, as: as, constraints: constraints
+      @router.add verb, path, to: to, as: as, constraints: constraints, &block
     end
 
     # @see Rutter::Builder#add
     VERBS.each do |verb|
-      define_method verb.downcase do |path, to:, as: nil, constraints: nil|
-        add verb, path, to: to, as: as, constraints: constraints
+      define_method verb.downcase do |path, to: nil, as: nil, constraints: nil, &block|
+        add verb, path, to: to, as: as, constraints: constraints, &block
       end
     end
   end
