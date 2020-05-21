@@ -84,8 +84,8 @@ module Rutter
     #
     # @private
     def call(env)
-      env["rutter.params"] ||= {}
-      env["rutter.params"].merge!(params(env["PATH_INFO"]))
+      env["router.params"] ||= {}
+      env["router.params"].merge!(params(env["PATH_INFO"]))
       env["rutter.action"] = @endpoint[:action]
 
       ctrl = @endpoint[:controller]

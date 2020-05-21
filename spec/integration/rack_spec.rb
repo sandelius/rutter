@@ -4,7 +4,7 @@ RSpec.describe "Rack compatible", type: :request do
   let :router do
     Rutter.new do
       get "/say/:message", to: (lambda do |env|
-        [200, {}, ["I say, #{env['rutter.params']['message']}"]]
+        [200, {}, ["I say, #{env['router.params']['message']}"]]
       end)
     end
   end

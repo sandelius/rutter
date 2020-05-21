@@ -10,7 +10,7 @@ router = Rutter.new do
   get "/", to: ->(_) { [200, {}, ["Hello World"]] }
 
   # wrk -t 2 http://localhost:9292/ruby
-  get "/:lang", to: ->(env) { [200, {}, [env["rutter.params"]["lang"]]] }
+  get "/:lang", to: ->(env) { [200, {}, [env["router.params"]["lang"]]] }
 end.freeze
 
 run router
