@@ -40,7 +40,7 @@ module Rutter
     def initialize(base: "http://localhost:9292", &block)
       @uri = URI(base).freeze
       @flat_map = []
-      @verb_map = Hash.new { |h, k| h[k] = [] }
+      @verb_map = VERBS.map { |v| [v, []] }.to_h
       @named_map = {}
 
       instance_eval(&block) if block_given?
