@@ -3,7 +3,6 @@
 require "uri"
 
 require_relative "naming"
-require_relative "verbs"
 require_relative "route"
 require_relative "mount"
 require_relative "scope"

@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "rutter/version"
-require_relative "rutter/builder"
-
 # HTTP router for Rack.
 module Rutter
+  # Supported request verbs.
+  #
+  # @return [Array]
+  VERBS = %w[GET POST PUT PATCH DELETE OPTIONS].freeze
+
+  require_relative "rutter/version"
+  require_relative "rutter/builder"
+
   # Factory method for creating a new builder object.
   #
   # @param base [String]
